@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@basic-starter/scripts",
+  "name": "@react-plots/scripts",
   "version": "1.0.0",
   "main": "src/index.ts",
   "type": "module",

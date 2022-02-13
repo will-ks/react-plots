@@ -1,14 +1,15 @@
 {
-  "name": "basic-starter",
+  "name": "react-plots",
   "private": true,
   "workspaces": {
     "packages": [
       "packages/*",
-      "scripts"
+      "scripts",
+      "plots"
     ]
   },
   "scripts": {
-    "setup": "cp check-commits.sh .git/hooks/pre-push && cp check-commits.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-push && chmod +x .git/hooks/pre-commit && git remote add template git@github.com:dambusm/basic-starter.git",
+    "setup": "cp check-commits.sh .git/hooks/pre-push && cp check-commits.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-push && chmod +x .git/hooks/pre-commit && git remote add template git@github.com:dambusm/react-plots.git",
     "merge-template-changes": "git fetch template && git merge template/main --allow-unrelated-histories"
   },
   "devDependencies": {

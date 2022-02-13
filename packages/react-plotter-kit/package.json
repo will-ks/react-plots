@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "@react-plots/react-plotter-kit",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "dependencies": {
+    "react": "17.0.2"
+  }
+}
