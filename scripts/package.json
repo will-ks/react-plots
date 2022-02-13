@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@basic-starter/scripts",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "foo": "node --loader ts-node/esm src/foo.ts"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "dependencies": {
+    "ts-node": "10.4.0",
+    "zx": "4.2.0"
+  }
+}

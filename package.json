@@ -1,0 +1,33 @@
+{
+  "name": "basic-starter",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "scripts"
+    ]
+  },
+  "scripts": {
+    "setup": "cp check-commits.sh .git/hooks/pre-push && cp check-commits.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-push && chmod +x .git/hooks/pre-commit && git remote add template git@github.com:dambusm/basic-starter.git",
+    "merge-template-changes": "git fetch template && git merge template/main --allow-unrelated-histories"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.4",
+    "@typescript-eslint/eslint-plugin": "5.8.0",
+    "@typescript-eslint/parser": "5.8.0",
+    "babel-eslint": "10.1.0",
+    "eslint": "8.5.0",
+    "eslint-config-react-app": "7.0.0",
+    "eslint-plugin-flowtype": "8.0.3",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-no-unsanitized": "4.0.1",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-testcafe": "0.2.1",
+    "eslint-plugin-unicorn": "39.0.0",
+    "prettier": "2.5.1",
+    "typescript": "4.5.4"
+  }
+}
