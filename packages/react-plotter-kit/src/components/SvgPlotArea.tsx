@@ -1,14 +1,15 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps, useEffect, useRef, useState } from 'react';
 import { getRandomId } from '../helpers/helpers';
 
 export const SvgPlotArea = React.forwardRef<
   SVGSVGElement,
   Props & SVGProps<SVGSVGElement>
->((props, ref) => {
+>((props, forwardedRef) => {
   const {
     children,
     drawableRegionInPixels,
-    marginInPixels,
+    marginInPixels = { horizontal: 0, vertical: 0 },
+    centerContents,
     ...svgProps
   } = props;
   const clipPathId = getRandomId();
@@ -16,11 +17,23 @@ export const SvgPlotArea = React.forwardRef<
     width: drawableRegionInPixels.width + marginInPixels.horizontal * 2,
     height: drawableRegionInPixels.height + marginInPixels.vertical * 2,
   };
+  const groupRef = useRef<SVGSVGElement>(null);
+  const [groupBBoxSize, setGroupBBoxSize] = useState<RegionSize>({
+    width: 0,
+    height: 0,
+  });
+  useEffect(() => {
+    if (!groupRef.current) {
+      return;
+    }
+    const groupBBox = groupRef.current.getBBox();
+    setGroupBBoxSize({ width: groupBBox.width, height: groupBBox.height });
+  }, [children]);
   return (
     <svg
+      ref={forwardedRef}
       {...svgProps}
       viewBox={`0 0 ${paperSizeInPixels.width} ${paperSizeInPixels.height}`}
-      ref={ref}
       style={{
         height: paperSizeInPixels.height,
         width: paperSizeInPixels.width,
@@ -35,8 +48,15 @@ export const SvgPlotArea = React.forwardRef<
         />
       </clipPath>
       <g
+        ref={groupRef}
         clipPath={`url(#${clipPathId})`}
-        transform={`translate(${marginInPixels.horizontal},${marginInPixels.vertical})`}
+        transform={
+          centerContents
+            ? `translate(${
+                (paperSizeInPixels.width - groupBBoxSize.width) / 2
+              },${(paperSizeInPixels.height - groupBBoxSize.height) / 2})`
+            : `translate(${marginInPixels.horizontal},${marginInPixels.vertical})`
+        }
       >
         {children}
       </g>
@@ -44,7 +64,7 @@ export const SvgPlotArea = React.forwardRef<
   );
 });
 
-export type Margin = { horizontal: number; vertical: number };
+export type HorizontalVerticalPair = { horizontal: number; vertical: number };
 
 export type RegionSize = {
   width: number;
@@ -53,6 +73,6 @@ export type RegionSize = {
 
 type Props = {
   drawableRegionInPixels: RegionSize;
-  marginInPixels: Margin;
+  marginInPixels?: HorizontalVerticalPair;
+  centerContents?: boolean;
 };
-

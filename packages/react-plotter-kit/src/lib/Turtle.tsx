@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export type Coordinates = { x: number; y: number };
 
@@ -74,7 +74,11 @@ export class Turtle {
     return this;
   }
 
-  goTo(position: Coordinates, draw: boolean) {
+  goTo(position: Coordinates, draw = false) {
+    const previousPenDown = this.getIsPenDown();
+    if (!draw) {
+      this.penUp();
+    }
     const roundedCoordinates = {
       x: position.x,
       y: position.y,
@@ -83,6 +87,9 @@ export class Turtle {
       this.addLineToPosition(roundedCoordinates);
     }
     this.position = roundedCoordinates;
+    if (previousPenDown && !draw) {
+      this.penDown();
+    }
     return this;
   }
 

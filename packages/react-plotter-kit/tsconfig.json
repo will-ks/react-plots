@@ -4,7 +4,8 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
-    "isolatedModules": false
+    "isolatedModules": false,
+    "lib": ["dom"]
   },
   "types": ["node"],
   "include": ["src"]
