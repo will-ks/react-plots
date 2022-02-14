@@ -34,7 +34,7 @@ const drawSpiral = (coords: Coordinates) => {
   return turtle.getPaths();
 };
 
-const Demo = () => {
+export default () => {
   const { value: xNum, slider: xNumSlider } = useSlider(
     1,
     Math.floor(drawableRegionInPixels.width / 50),
@@ -69,5 +69,3 @@ const Demo = () => {
     </div>
   );
 };
-
-export default Demo;

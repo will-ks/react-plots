@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': ['error', {}],
     'import/namespace': 'off',
+    'import/no-anonymous-default-export': 'off',
     'security/detect-object-injection': 'off',
     'unicorn/better-regex': 'error',
     'unicorn/catch-error-name': 'error',
