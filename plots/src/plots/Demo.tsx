@@ -7,6 +7,8 @@ import {
   SvgPlotArea,
   Turtle,
 } from '@react-plots/react-plotter-kit';
+import { SvgGroup } from '@react-plots/react-plotter-kit/src/components/SvgGroup';
+import usePlot from '@react-plots/react-plotter-kit/src/lib/usePlot';
 import { useSlider } from '@react-plots/react-plotter-kit/src/lib/useSlider';
 import React from 'react';
 
@@ -49,6 +51,10 @@ export default () => {
     { horizontal: xNum, vertical: yNum },
     drawableRegionInPixels
   );
+  const { svgGroupProps, svgPlotAreaProps } = usePlot(
+    drawableRegionInPixels,
+    marginInPixels
+  );
   return (
     <div
       style={{
@@ -58,12 +64,10 @@ export default () => {
       }}
     >
       <Easel toolbox={[xNumSlider, yNumSlider]}>
-        <SvgPlotArea
-          drawableRegionInPixels={drawableRegionInPixels}
-          marginInPixels={marginInPixels}
-          centerContents={true}
-        >
-          {points.map((coords) => drawSpiral(coords))}
+        <SvgPlotArea {...svgPlotAreaProps}>
+          <SvgGroup {...svgGroupProps} centerContents={true}>
+            {points.map((coords) => drawSpiral(coords))}
+          </SvgGroup>
         </SvgPlotArea>
       </Easel>
     </div>
