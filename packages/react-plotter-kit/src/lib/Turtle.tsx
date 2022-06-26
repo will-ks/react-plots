@@ -33,12 +33,16 @@ export class Turtle {
     }
   }
 
-  rotate(degrees: number) {
+  private rotate(degrees: number) {
     this.rotation = (this.rotation + degrees) % 360;
     if (this.rotation < 0) {
       this.rotation += 360;
     }
     return this;
+  }
+
+  face(degrees: number) {
+    this.rotation = degrees;
   }
 
   left(degrees: number) {
