@@ -1,5 +1,5 @@
 import React, { SVGProps } from 'react';
-import { RegionSize } from '../lib/usePlot';
+import { HorizontalVerticalPair, RegionSize } from '../lib/usePlot';
 
 export const SvgPlotArea = React.forwardRef<SVGSVGElement, SvgPlotAreaProps>(
   (props, forwardedRef) => {
@@ -7,6 +7,7 @@ export const SvgPlotArea = React.forwardRef<SVGSVGElement, SvgPlotAreaProps>(
       children,
       paperSizeInPixels,
       drawableRegionInPixels,
+      marginInPixels,
       clipPathId,
       ...svgProps
     } = props;
@@ -21,14 +22,16 @@ export const SvgPlotArea = React.forwardRef<SVGSVGElement, SvgPlotAreaProps>(
           width: paperSizeInPixels.width,
         }}
       >
-        <clipPath id={clipPathId}>
-          <rect
-            x={0}
-            y={0}
-            width={drawableRegionInPixels.width}
-            height={drawableRegionInPixels.height}
-          />
-        </clipPath>
+        {marginInPixels.horizontal + marginInPixels.vertical > 0 && (
+          <clipPath id={clipPathId}>
+            <rect
+              x={0}
+              y={0}
+              width={drawableRegionInPixels.width}
+              height={drawableRegionInPixels.height}
+            />
+          </clipPath>
+        )}
         {children}
       </svg>
     );
@@ -38,6 +41,7 @@ export const SvgPlotArea = React.forwardRef<SVGSVGElement, SvgPlotAreaProps>(
 type Props = {
   paperSizeInPixels: RegionSize;
   drawableRegionInPixels: RegionSize;
+  marginInPixels: HorizontalVerticalPair;
   clipPathId: string;
 };
 export type SvgPlotAreaProps = Props & Omit<SVGProps<SVGSVGElement>, 'ref'>;

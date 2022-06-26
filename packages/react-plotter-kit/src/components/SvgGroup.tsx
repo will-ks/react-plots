@@ -27,7 +27,11 @@ export const SvgGroup: FC<SvgGroupProps> = (props) => {
   return (
     <g
       ref={groupRef}
-      clipPath={`url(#${clipPathId})`}
+      clipPath={
+        marginInPixels.horizontal + marginInPixels.vertical > 0
+          ? `url(#${clipPathId})`
+          : undefined
+      }
       transform={
         centerContents
           ? `translate(${(paperSizeInPixels.width - groupBBoxSize.width) / 2},${

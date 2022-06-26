@@ -17,6 +17,7 @@ const usePlot = (
       drawableRegionInPixels,
       paperSizeInPixels,
       clipPathId,
+      marginInPixels,
     },
     svgGroupProps: {
       clipPathId,
