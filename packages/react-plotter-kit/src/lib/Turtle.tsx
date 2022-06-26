@@ -43,6 +43,7 @@ export class Turtle {
 
   face(degrees: number) {
     this.rotation = degrees;
+    return this;
   }
 
   left(degrees: number) {
