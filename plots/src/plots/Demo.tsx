@@ -56,20 +56,12 @@ export default () => {
     marginInPixels
   );
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Easel toolbox={[xNumSlider, yNumSlider]}>
-        <SvgPlotArea {...svgPlotAreaProps}>
-          <SvgGroup {...svgGroupProps} centerContents={true}>
-            {points.map((coords) => drawSpiral(coords))}
-          </SvgGroup>
-        </SvgPlotArea>
-      </Easel>
-    </div>
+    <Easel toolbox={[xNumSlider, yNumSlider]}>
+      <SvgPlotArea {...svgPlotAreaProps}>
+        <SvgGroup {...svgGroupProps} centerContents={true}>
+          {points.map((coords) => drawSpiral(coords))}
+        </SvgGroup>
+      </SvgPlotArea>
+    </Easel>
   );
 };

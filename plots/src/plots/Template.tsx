@@ -23,18 +23,10 @@ export default () => {
     marginInPixels
   );
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Easel>
-        <SvgPlotArea {...svgPlotAreaProps}>
-          <SvgGroup {...svgGroupProps} centerContents={true}></SvgGroup>
-        </SvgPlotArea>
-      </Easel>
-    </div>
+    <Easel>
+      <SvgPlotArea {...svgPlotAreaProps}>
+        <SvgGroup {...svgGroupProps} centerContents={true}></SvgGroup>
+      </SvgPlotArea>
+    </Easel>
   );
 };

@@ -86,32 +86,24 @@ export default () => {
     3
   );
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Easel toolbox={[branchesSlider]}>
-        <SvgPlotArea {...svgPlotAreaProps}>
-          <SvgGroup {...svgGroupProps} centerContents={false}>
-            {new Turtle({
+    <Easel toolbox={[branchesSlider]}>
+      <SvgPlotArea {...svgPlotAreaProps}>
+        <SvgGroup {...svgGroupProps} centerContents={false}>
+          {new Turtle({
+            x: drawableRegionInPixels.width / 2,
+            y: drawableRegionInPixels.height,
+          })
+            .face(90)
+            .forward(300)
+            .getPaths()}
+          {getArrayOfNumbers(numberOfInitialBranches).map(() =>
+            drawBranch({
               x: drawableRegionInPixels.width / 2,
-              y: drawableRegionInPixels.height,
+              y: drawableRegionInPixels.height - 300,
             })
-              .face(90)
-              .forward(300)
-              .getPaths()}
-            {getArrayOfNumbers(numberOfInitialBranches).map(() =>
-              drawBranch({
-                x: drawableRegionInPixels.width / 2,
-                y: drawableRegionInPixels.height - 300,
-              })
-            )}
-          </SvgGroup>
-        </SvgPlotArea>
-      </Easel>
-    </div>
+          )}
+        </SvgGroup>
+      </SvgPlotArea>
+    </Easel>
   );
 };
