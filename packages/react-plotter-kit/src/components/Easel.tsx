@@ -1,10 +1,13 @@
-import React, { HTMLAttributes } from 'react';
+import { getAsserted } from '@will-ks/helpers';
+import React, { HTMLAttributes, useRef } from 'react';
+import { saveAs } from 'file-saver';
 
 export const Easel = React.forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement> & Props
 >((props, ref) => {
   const { children, style, toolbox, ...rest } = props;
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -22,29 +25,41 @@ export const Easel = React.forwardRef<
           display: 'flex',
           ...style,
         }}
+        ref={containerRef}
         {...rest}
       >
         {children}
       </div>
-      {toolbox && (
-        <div
-          style={{
-            boxShadow: '-1px 13px 30px 7px rgba(171,171,171,0.39)',
-            display: 'flex',
-            padding: '10px',
-            marginLeft: '30px',
-            flexDirection: 'column',
-            ...style,
+      <div
+        style={{
+          boxShadow: '-1px 13px 30px 7px rgba(171,171,171,0.39)',
+          display: 'grid',
+          gridGap: '2em',
+          padding: '10px',
+          marginLeft: '30px',
+          flexDirection: 'column',
+          ...style,
+        }}
+        {...rest}
+      >
+        <button
+          onClick={() => {
+            const containerElement = getAsserted(containerRef.current);
+            const svgContents = containerElement.innerHTML;
+            const svgBlob = new Blob([svgContents], { type: 'image/svg+xml' });
+            saveAs(svgBlob);
           }}
-          {...rest}
         >
-          {toolbox}
-        </div>
-      )}
+          Save
+        </button>
+        {toolbox?.map((element) => (
+          <div>{element}</div>
+        ))}
+      </div>
     </div>
   );
 });
 
 type Props = {
-  toolbox?: React.ReactNode;
+  toolbox?: React.ReactNode[];
 };

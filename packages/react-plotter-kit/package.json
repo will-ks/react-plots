@@ -7,6 +7,11 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@will-ks/helpers": "1.3.0",
+    "file-saver": "^2.0.5",
     "react": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5"
   }
 }
